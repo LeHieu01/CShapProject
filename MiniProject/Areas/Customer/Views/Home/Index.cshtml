@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Product>
+@* <style>
+    .card-text {
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* number of lines to show */
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+</style>
+ *@
+
+<div class="row pb-3">
+    <h1 class="text-center pt-5 pb-2 px-5">Product List</h1>
+    <figure class="text-center">
+        <blockquote class="blockquote">
+            <p class="mb-0">
+                Welcome to the internet, have a look around <br />
+                Anything that brain of yours can think of can be found <br />
+                We've got mountains of Products, some good and some great <br />
+                If none of it's of interest to you, you'd be the best :)
+            </p>
+
+        </blockquote>
+    </figure>
+    @foreach (var product in Model)
+    {
+        <div class="col-lg-4 col-sm-6">
+            <div class="row p-2">
+                <div class="col-12">
+                    <div class="card m-4">
+                        <h3 class="card-header py-4 bg-dark text-light">@product.Title</h3>
+                        @* <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+                        </div> *@
+                        <img src="@product.Image" class="card-img-top"/>
+                        @* <div class="card-body">
+                            <h6 class="card-title">Description</h6>
+                            <p class="card-text">@Html.Raw(product.Description)</p>
+                        </div> *@
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <p class="card-text">
+                                    <span style="font-weight:900">Author: </span>
+                                    @product.Author
+                                </p>
+                            </li>
+                            <li class="list-group-item">
+                                <span style="font-weight:900">Category: </span>
+                                @product.Category.Name
+                            </li>
+                            <li class="list-group-item">
+                                <p class="card-text" style="font-size:larger;">
+                                    @* <span style="font-size:smaller;">List price: </span> *@
+                                    <span style="font-weight:700"> Price: </span>
+                                    <span class="text-decoration-line-through" style="font-size:small; margin-inline:5px"> @(product.ListPrice).000vnđ</span>
+                                    @* <span style="font-weight:700"> Price: </span> *@
+                                    <span style="font-weight:900; color:rgb(255, 66, 78)">@(product.Price).000vnđ</span>
+
+                                </p>
+                            </li>
+                        </ul>
+                        <div class="card-body" style="display: flex;  justify-content: center;">
+                            <a asp-action="Details" asp-route-id="@product.Id" class="card-link btn btn-light p-2">View details</a>
+                            <button type="button" class="btn btn-outline-primary p-2" style="margin-left: 3em">Add to cart</button>
+                        </div>
+                        @* <div class="card-footer text-muted">
+                            2 days ago
+                        </div> *@
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    }
+</div>

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Product> 
+@{
+    ViewData["Title"] = "Index";
+}
+
+<partial name="_Notification" />
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary ml-0 py-3">
+        <div class="row">
+            <div class="col-6">
+                <h2 class="text-primary-emphasis py-2">product list</h2>
+            </div>
+            <div class="col-6 text-end">
+                <a asp-controller="Product" asp-action="Upsert" class="btn btn-outline-primary"><i class="bi bi-plus-circle-fill pe-1"></i>New</a>
+            </div>
+        </div>
+        <div class="card-body p-4">
+            <table id="tblData" class="table table-bordered table-striped overflow-hidden pt-3" style="width: 100%;">
+                <thead>
+                    <tr class="table-dark" style="text-align: center;">
+                        <th>Title</th>
+                        <th>ISBN</th>
+                        <th>Author</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/js/Product.js"></script>
+}

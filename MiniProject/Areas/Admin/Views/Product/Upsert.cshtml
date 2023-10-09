@@ -1,0 +1,120 @@
+﻿
+@model ProductViewModel;
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-primary-emphasis py-2"> @((Model.Product.Id != 0) ? "Update" : "Create") Product </h2>
+            </div>
+        </div>
+        <div class="card-body p-4">
+            <form method="post" class="row" enctype="multipart/form-data">
+                <input asp-for="Product.Id" hidden />
+                <input asp-for="Product.Image" hidden />
+                <div class="row m-3">
+                    <div class="col-md-6 mt-3">
+                        <label asp-for="Product.Title" class="form-label" style="background-color: transparent;">Title</label>
+                        <input asp-for="Product.Title" type="text" class="form-control" id="Title" />
+                        <span asp-validation-for="Product.Title" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mt-3">
+                        <label asp-for="Product.ISBN" class="form-label" style="background-color: transparent;">ISBN</label>
+                        <input asp-for="Product.ISBN" type="text" class="form-control" id="ISBN" />
+                        <span asp-validation-for="Product.ISBN" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mt-3">
+                        <label asp-for="Product.Author" class="form-label" style="background-color: transparent;">Author</label>
+                        <input asp-for="Product.Author" type="text" class="form-control" id="Author"/>
+                        <span asp-validation-for="Product.Author" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mt-3">
+                        <label asp-for="Product.ListPrice" class="form-label" style="background-color: transparent;">ListPrice</label>
+                        <input asp-for="Product.ListPrice" type="text" class="form-control" id="ListPrice" />
+                        <span asp-validation-for="Product.ListPrice" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 mt-3">
+                        <label asp-for="Product.Price" class="form-label" style="background-color: transparent;">Price</label>
+                        <input asp-for="Product.Price" type="text" class="form-control" id="Price"/>
+                        <span asp-validation-for="Product.Price" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 mt-3">
+                        <label asp-for="Product.Price50" class="form-label" style="background-color: transparent;">Price50</label>
+                        <input asp-for="Product.Price50" type="text" class="form-control" id="Price50"/>
+                        <span asp-validation-for="Product.Price50" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 mt-3">
+                        <label asp-for="Product.Price100" class="form-label" style="background-color: transparent;">Price100</label>
+                        <input asp-for="Product.Price100" type="text" class="form-control" id="Price100"/>
+                        <span asp-validation-for="Product.Price100" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-8 mt-3">
+                        <label asp-for="Product.Description" class="form-label text-muted" style="background-color: transparent;">Description</label>
+                        <textarea asp-for="Product.Description" type="text" class="form-control" id="Description"></textarea>
+                    </div>
+                    <div class="col-md-4 mt-3">
+                        <div>
+                            <label asp-for="Product.CategoryId" class="form-label mt-4">Example select</label>
+                            <select asp-for="Product.CategoryId" asp-items="@Model.CategoryList" class="form-select" id="CategoryId" style="outline-style: solid ;outline-color: #c0c0c0">
+                                <option disabled selected>__Select Category__</option>
+                            </select>
+                            <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+                        </div>
+                        <div class="mt-3">
+                            <label asp-for="Product.Image" class="form-label" style="background-color: transparent;">Image</label>
+                            <input type="file" name="file" class="form-control" id="Image" />
+                            <span asp-validation-for="Product.Image" class="text-danger"></span>
+                        </div>
+                        <div>
+                            <img src="@Model.Product.Image" style="border-radius:5px; width:100%; border:1px solid #c0c0c0" />
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="row pt-2">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-end">
+                            @if (Model.Product.Id != 0)
+                            {
+                                <button type="submit" class="btn btn-outline-success" style="margin-right: 10px;">Update</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-outline-success" style="margin-right: 10px;">Create</button>
+                            }
+
+                            <a asp-controller="Product" asp-action="Index" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts{
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'anchor autolink charmap codesample emoticons lists table visualblocks wordcount',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | align lineheight | tinycomments | checklist numlist bullist indent outdent',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            mergetags_list: [
+                { value: 'First.Name', title: 'First Name' },
+                { value: 'Email', title: 'Email' },
+            ],
+            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant"))
+        });
+    </script>
+
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
